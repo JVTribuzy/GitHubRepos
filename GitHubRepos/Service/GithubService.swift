@@ -14,7 +14,7 @@ class GithubService {
         return URLSession(configuration: URLSessionConfiguration.default)
     }()
     
-    func fetch<W: Decodable>(model: W.Type, from url: URL?, completion: @escaping (W?) -> Void) {
+    func fetch<W: Decodable>(model: W.Type, from url: URL?, completion:@escaping (W?) -> Void) {
         guard let fetchURL = url else { return }
         let request = URLRequest(url: fetchURL)
         
@@ -26,7 +26,7 @@ class GithubService {
             }
             
             do {
-                let response: W? = try JSONDecoder().decode(model, from: data)
+                let response: W? = try JSONDecoder.standart.decode(model, from: data)
                 completion(response)
             } catch let jsonError {
                 print("decoding error: ", jsonError)
