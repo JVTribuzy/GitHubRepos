@@ -30,7 +30,10 @@ extension MainViewController: GitHubReposView {
     func layout() {
         view.subviews(
             repoSegmentedControl,
-            reposView
+            reposView.subviews(
+                allReposViewController.view,
+                savedReposViewController.view
+            )
         )
         
         // repoSegmentedControl
@@ -40,6 +43,12 @@ extension MainViewController: GitHubReposView {
         // reposView
         reposView.Top == repoSegmentedControl.Bottom + 16
         reposView.right(0).left(0).bottom(0)
+        
+        // allReposView
+        allReposViewController.view.top(0).right(0).left(0).bottom(0)
+        
+        // savedReposView
+        savedReposViewController.view.top(0).right(0).left(0).bottom(0)
     }
     
     func style() {
@@ -52,7 +61,10 @@ extension MainViewController: GitHubReposView {
         repoSegmentedControl.backgroundColor = UIColor(named: "SegmentedBackground")
         repoSegmentedControl.tintColor = UIColor(named: "Segmented")
         
-        // reposView
-        reposView.backgroundColor = .blue
+        // allReposView
+        allReposViewController.view.alpha = 1
+        
+        // savedReposView
+        savedReposViewController.view.alpha = 0
     }
 }
