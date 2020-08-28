@@ -10,10 +10,10 @@ import UIKit
 
 class AllReposViewController: UIViewController {
     
+    private let viewModel = GitHubReposViewModel()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .green
     }
 }

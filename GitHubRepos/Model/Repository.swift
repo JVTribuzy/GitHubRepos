@@ -11,11 +11,11 @@ import Foundation
 struct Reporitory : Decodable{
     let id: Int
     let name: String
-    let isPrivate: Bool
+    let `private`: Bool
     let owner: Owner
-    let htmlUrl: URL?
+    let htmlUrl: String?
     let description: String?
-    let pullsUrl: URL?
+    let pullsUrl: String?
     let language: String?
     let forks: Int
     let openIssues: Int

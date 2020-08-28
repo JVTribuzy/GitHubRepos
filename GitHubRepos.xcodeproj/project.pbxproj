@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		383E99FF24F98DB600AA9EDF /* GithubReposViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E99FE24F98DB600AA9EDF /* GithubReposViewModel.swift */; };
 		389AB56624F96593001D88C3 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389AB56524F96593001D88C3 /* Repository.swift */; };
 		389AB56824F9663D001D88C3 /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389AB56724F9663D001D88C3 /* Owner.swift */; };
 		389AB56B24F97348001D88C3 /* GithubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389AB56A24F97348001D88C3 /* GithubService.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		383E99FE24F98DB600AA9EDF /* GithubReposViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubReposViewModel.swift; sourceTree = "<group>"; };
 		389AB56524F96593001D88C3 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		389AB56724F9663D001D88C3 /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		389AB56A24F97348001D88C3 /* GithubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubService.swift; sourceTree = "<group>"; };
@@ -96,13 +98,13 @@
 		38B3C7D324F83B66008A5F2A /* GitHubRepos */ = {
 			isa = PBXGroup;
 			children = (
-				389AB56C24F97D9F001D88C3 /* Extensions */,
-				389AB56924F97315001D88C3 /* Service */,
 				38B3C7FF24F849BF008A5F2A /* AppDelegate */,
 				38B3C80724F84A0B008A5F2A /* Resources */,
+				389AB56C24F97D9F001D88C3 /* Extensions */,
+				389AB56924F97315001D88C3 /* Service */,
 				38B3C80224F849BF008A5F2A /* Model */,
-				38B3C7FD24F849BF008A5F2A /* View */,
 				38B3C80324F849C0008A5F2A /* ViewModel */,
+				38B3C7FD24F849BF008A5F2A /* View */,
 			);
 			path = GitHubRepos;
 			sourceTree = "<group>";
@@ -140,6 +142,7 @@
 		38B3C80324F849C0008A5F2A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				383E99FE24F98DB600AA9EDF /* GithubReposViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				38ECA7FE24F953D9003F2E5A /* SavedReposViewController.swift in Sources */,
 				389AB57024F97E48001D88C3 /* URLManager.swift in Sources */,
 				38ECA7FC24F953BE003F2E5A /* AllReposViewController.swift in Sources */,
+				383E99FF24F98DB600AA9EDF /* GithubReposViewModel.swift in Sources */,
 				38ECA7F224F85E2C003F2E5A /* MainViewController.swift in Sources */,
 				389AB56B24F97348001D88C3 /* GithubService.swift in Sources */,
 				38B3C80524F849C0008A5F2A /* AppDelegate.swift in Sources */,

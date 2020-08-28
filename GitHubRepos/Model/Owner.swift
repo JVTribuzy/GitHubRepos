@@ -10,6 +10,6 @@ import Foundation
 
 struct Owner: Decodable{
     let login: String
-    let avatar_url: URL?
+    let avatarUrl: URL?
     let htmlUrl: URL?
 }
