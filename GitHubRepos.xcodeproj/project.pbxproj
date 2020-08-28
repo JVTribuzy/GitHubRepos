@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		383E99FF24F98DB600AA9EDF /* GithubReposViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E99FE24F98DB600AA9EDF /* GithubReposViewModel.swift */; };
+		383E9A0124F99F2200AA9EDF /* ReposCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E9A0024F99F2200AA9EDF /* ReposCollectionViewController.swift */; };
 		389AB56624F96593001D88C3 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389AB56524F96593001D88C3 /* Repository.swift */; };
 		389AB56824F9663D001D88C3 /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389AB56724F9663D001D88C3 /* Owner.swift */; };
 		389AB56B24F97348001D88C3 /* GithubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389AB56A24F97348001D88C3 /* GithubService.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		383E99FE24F98DB600AA9EDF /* GithubReposViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubReposViewModel.swift; sourceTree = "<group>"; };
+		383E9A0024F99F2200AA9EDF /* ReposCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposCollectionViewController.swift; sourceTree = "<group>"; };
 		389AB56524F96593001D88C3 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		389AB56724F9663D001D88C3 /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		389AB56A24F97348001D88C3 /* GithubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubService.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				38ECA7F924F8607E003F2E5A /* GitHubReposView.swift */,
+				383E9A0024F99F2200AA9EDF /* ReposCollectionViewController.swift */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				38ECA7F224F85E2C003F2E5A /* MainViewController.swift in Sources */,
 				389AB56B24F97348001D88C3 /* GithubService.swift in Sources */,
 				38B3C80524F849C0008A5F2A /* AppDelegate.swift in Sources */,
+				383E9A0124F99F2200AA9EDF /* ReposCollectionViewController.swift in Sources */,
 				389AB57224F98024001D88C3 /* GithubResultAPI.swift in Sources */,
 				38B3C80624F849C0008A5F2A /* SceneDelegate.swift in Sources */,
 				38ECA7FA24F8607E003F2E5A /* GitHubReposView.swift in Sources */,

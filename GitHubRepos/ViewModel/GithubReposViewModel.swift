@@ -16,7 +16,15 @@ class GitHubReposViewModel {
         }
     }
     
-    public private(set) var allRepos: [Reporitory]? = nil
+    public private(set) var allRepos: [Reporitory]? = nil {
+        didSet{
+            if allRepos != nil {
+                reposCount = allRepos?.count
+            }
+        }
+    }
+    
+    public private(set) var reposCount: Int? = nil
 
     init() {
         fetchAllRepos()
