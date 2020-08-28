@@ -27,17 +27,18 @@ extension MainViewController: GitHubReposView {
         }
         
         // repoSegmentedControl
-        repoSegmentedControl.top(8).right(16).left(16).height(30)
+        repoSegmentedControl.top(16).right(16).left(16).height(35)
         repoSegmentedControl.Top == view.safeAreaLayoutGuide.Top
     }
     
     func style() {
+        // view
+        view.backgroundColor = UIColor(named: "DefaultBackground")
         
         // repoSegmentedControl
         repoSegmentedControl.selectedSegmentIndex = 0
         repoSegmentedControl.layer.cornerRadius = 5.0
-        repoSegmentedControl.backgroundColor = .white
-        repoSegmentedControl.tintColor = .black
-
+        repoSegmentedControl.backgroundColor = UIColor(named: "SegmentedBackground")
+        repoSegmentedControl.tintColor = UIColor(named: "Segmented")
     }
 }
