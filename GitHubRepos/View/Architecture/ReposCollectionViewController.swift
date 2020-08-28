@@ -17,14 +17,14 @@ class ReposCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupCollectionView()
+        
         layout()
         style()
     }
     
-    override init(collectionViewLayout layout: UICollectionViewLayout) {
-        super.init(collectionViewLayout: layout)
-        
-        setupCollectionView()
+    init() {
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
     required init?(coder: NSCoder) {
@@ -59,13 +59,13 @@ extension ReposCollectionViewController {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: view.frame.size.width - 16, height: 100)
+        layout.itemSize = CGSize(width: view.frame.size.width - 16, height: 130)
         
         collectionView.collectionViewLayout = layout
     }
     
     private func setupCollectionViewCell(){
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
+        collectionView.register(RepoCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -74,8 +74,7 @@ extension ReposCollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath)
-        cell.backgroundColor = UIColor.blue
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RepoCollectionViewCell
         return cell
     }
 }
