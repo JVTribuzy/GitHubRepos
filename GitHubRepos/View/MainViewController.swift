@@ -12,10 +12,10 @@ import Stevia
 class MainViewController: UIViewController {
     
     // MARK: - Components
-    let repoSegmentedControl: UISegmentedControl = UISegmentedControl(items: ["All", "Saved"])
-    let reposView: UIView = UIView()
-    let allReposViewController = AllReposViewController()
-    let savedReposViewController = SavedReposViewController()
+    private let repoSegmentedControl: UISegmentedControl = UISegmentedControl(items: ["All", "Saved"])
+    private let reposView: UIView = UIView()
+    private let allReposViewController = AllReposViewController()
+    private let savedReposViewController = SavedReposViewController()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -23,9 +23,12 @@ class MainViewController: UIViewController {
         
         layout()
         style()
+        
+        setupSegmentedControlFuncionality()
     }
 }
 
+// MARK: - Style and Layout
 extension MainViewController: GitHubReposView {
     func layout() {
         view.subviews(
@@ -66,5 +69,27 @@ extension MainViewController: GitHubReposView {
         
         // savedReposView
         savedReposViewController.view.alpha = 0
+    }
+}
+
+extension MainViewController {
+    private func setupSegmentedControlFuncionality() {
+        repoSegmentedControl.addTarget(self, action: #selector(switchRepoViews(sender:)), for: .valueChanged)
+    }
+    
+    @objc private func switchRepoViews(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            UIView.animate(withDuration: 0.3) {
+                self.allReposViewController.view.alpha = 1
+                self.savedReposViewController.view.alpha = 0
+            }
+        case 1:
+            UIView.animate(withDuration: 0.3) {
+                self.allReposViewController.view.alpha = 0
+                self.savedReposViewController.view.alpha = 1
+            }
+        default: break
+        }
     }
 }
