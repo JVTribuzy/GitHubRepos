@@ -20,6 +20,9 @@ class GitHubReposViewModel {
         didSet{
             if allRepos != nil {
                 reposCount = allRepos?.count
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .reloadAllReposCollectionView, object: nil)
+                }
             }
         }
     }
@@ -33,7 +36,7 @@ class GitHubReposViewModel {
     func fetchAllRepos() {
         GithubResultAPI().fetch { [weak self] result in
             // TODO: Remove print result
-            print(result)
+//            print(result)
             self?.githubAPIResult = result
         }
     }

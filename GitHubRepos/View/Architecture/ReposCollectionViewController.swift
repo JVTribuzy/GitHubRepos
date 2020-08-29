@@ -11,7 +11,7 @@ import Stevia
 
 class ReposCollectionViewController: UICollectionViewController {
     
-    private let viewModel = GitHubReposViewModel()
+    private let viewModel = GitHubReposViewModel() 
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -78,4 +78,3 @@ extension ReposCollectionViewController {
         return cell
     }
 }
-

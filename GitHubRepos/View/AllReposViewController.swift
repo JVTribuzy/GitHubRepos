@@ -19,6 +19,12 @@ class AllReposViewController: UIViewController {
         
         layout()
         style()
+        
+        setupNotifications()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -33,4 +39,16 @@ extension AllReposViewController: GitHubReposView{
     }
     
     func style() {}
+}
+
+extension AllReposViewController{
+    private func setupNotifications(){
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadAllReposCollectionViewNotificationReceived(_:)), name: .reloadAllReposCollectionView, object: nil)
+    }
+    
+    @objc private func reloadAllReposCollectionViewNotificationReceived(_ notification: Notification){
+        DispatchQueue.main.async {
+            self.allReposCollectionViewController.collectionView.reloadData()
+        }
+    }
 }
