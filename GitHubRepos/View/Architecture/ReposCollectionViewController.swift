@@ -9,9 +9,16 @@
 import UIKit
 import Stevia
 
+enum RepoListType{
+    case all
+    case saved
+}
+
 class ReposCollectionViewController: UICollectionViewController {
     
-    private let viewModel = GitHubReposViewModel() 
+    private let viewModel = GitHubReposViewModel()
+    
+    private var reposListType: RepoListType?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -23,8 +30,9 @@ class ReposCollectionViewController: UICollectionViewController {
         style()
     }
     
-    init() {
+    init(type: RepoListType) {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
+        reposListType = type
     }
     
     required init?(coder: NSCoder) {
@@ -69,12 +77,16 @@ extension ReposCollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return viewModel.reposCount != nil ? viewModel.reposCount! : 0
-        return 10
+        switch reposListType {
+        case .all: return viewModel.reposCount != nil ? viewModel.reposCount! : 0
+        case .saved: return 0
+        default: return 0
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RepoCollectionViewCell
+        cell.fill(with: viewModel.allRepos?[indexPath.row])
         return cell
     }
 }

@@ -16,6 +16,7 @@ struct Reporitory : Decodable{
     let htmlUrl: String?
     let description: String?
     let pullsUrl: String?
+    let stargazersCount: Int
     let language: String?
     let forks: Int
     let openIssues: Int

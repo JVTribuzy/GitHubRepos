@@ -11,7 +11,7 @@ import Stevia
 
 class AllReposViewController: UIViewController {
     
-    public private(set) var allReposCollectionViewController = ReposCollectionViewController()
+    public private(set) var allReposCollectionViewController = ReposCollectionViewController(type: .all)
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

@@ -44,7 +44,7 @@ extension MainViewController: GitHubReposView {
         repoSegmentedControl.top(16).right(16).left(16).height(35)
         
         // reposView
-        reposView.Top == repoSegmentedControl.Bottom + 16
+        reposView.Top == repoSegmentedControl.Bottom + 6
         reposView.right(0).left(0).bottom(0)
         
         // allReposView

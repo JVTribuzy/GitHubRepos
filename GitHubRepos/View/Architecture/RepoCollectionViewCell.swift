@@ -11,6 +11,9 @@ import Stevia
 
 class RepoCollectionViewCell: UICollectionViewCell {
     
+    private var repository: Reporitory? = nil
+    
+    // MARK: - Components
     private let repoNameLabel: UILabel = UILabel()
     private let descriptionLabel: UILabel = UILabel()
     
@@ -30,6 +33,18 @@ class RepoCollectionViewCell: UICollectionViewCell {
     }
 }
 
+extension RepoCollectionViewCell {
+    public func fill(with repo: Reporitory?) {
+        self.repository = repo
+        
+        guard repository != nil else { return }
+        
+        repoNameLabel.text = repository?.name
+        descriptionLabel.text = repository?.description
+        starredQuantityLabel.text = String(describing: repository!.stargazersCount)
+    }
+}
+
 extension RepoCollectionViewCell: GitHubReposView {
     func style() {
         // collectionViewCell
@@ -39,11 +54,11 @@ extension RepoCollectionViewCell: GitHubReposView {
         self.layer.borderColor = UIColor.gray.cgColor
         
         // repoNameLabel
-        repoNameLabel.text = "RepoName"
+        repoNameLabel.text = ""
         repoNameLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         
         // descriptionLabel
-        descriptionLabel.text = "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+        descriptionLabel.text = ""
         descriptionLabel.font = UIFont.systemFont(ofSize: 13)
         descriptionLabel.numberOfLines = 0
         
@@ -52,7 +67,7 @@ extension RepoCollectionViewCell: GitHubReposView {
         
         // starredQuantityLabel
         starredQuantityLabel.text = "0"
-        starredQuantityLabel.font = UIFont.systemFont(ofSize: 13)
+        starredQuantityLabel.font = UIFont.systemFont(ofSize: 15)
         starredQuantityLabel.numberOfLines = 0
     }
     
@@ -77,7 +92,7 @@ extension RepoCollectionViewCell: GitHubReposView {
         
         // starredQuantityLabel
         starredQuantityLabel.Leading == starImage.Trailing + 6
-        starredQuantityLabel.height(13)
+        starredQuantityLabel.height(15)
         
         align(horizontally: starImage, starredQuantityLabel)
     }
