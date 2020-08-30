@@ -16,9 +16,9 @@ class PullsViewModel {
         didSet{
             if allPulls != nil {
                 pullsCount = allPulls?.count
-//                DispatchQueue.main.async {
-//                    NotificationCenter.default.post(name: .reloadAllReposCollectionView, object: nil)
-//                }
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .reloadPullCollectionViewController, object: nil)
+                }
             }
         }
     }
@@ -35,7 +35,7 @@ class PullsViewModel {
     func fetchAllPulls() {
         PullAPI().fetch(owner: owner, repositoryName: repositoryName) { [weak self] pulls in
             // TODO: Remove print pulls
-            print(pulls)
+//            print(pulls)
             self?.allPulls = pulls
         }
     }

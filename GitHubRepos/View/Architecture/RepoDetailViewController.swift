@@ -11,8 +11,6 @@ import Stevia
 
 class RepoDetailViewController: UIViewController {
     
-    private var viewModel: PullsViewModel? = nil
-    
     // MARK: - Components
     
     private let titleLabel = UILabel()
@@ -21,6 +19,8 @@ class RepoDetailViewController: UIViewController {
     private let saveButton = UIButton()
     
     private let descriptionLabel = UILabel()
+    
+    private var pullsCollectionViewController: PullsCollectionViewController
     
     private var repository: Reporitory? = nil
     
@@ -32,29 +32,36 @@ class RepoDetailViewController: UIViewController {
         style()
         
         setupCloseButton()
+        
+        setupNotifications()
     }
     
-    init(repository: Reporitory?){
+    init(repository: Reporitory){
+        pullsCollectionViewController = PullsCollectionViewController(repository: repository)
         super.init(nibName: nil, bundle: nil)
         
         fill(repository)
-        
-        initPullViewModel()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 extension RepoDetailViewController {
-    func initPullViewModel() {
-        guard repository != nil else { return }
-        viewModel = PullsViewModel(owner: repository!.owner.login, repoName: repository!.name)
-        print(viewModel)
-        print("---------------------------------------")
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPullNotificationReceived(_:)), name: .reloadPullCollectionViewController, object: nil)
+    }
+    
+    @objc private func reloadPullNotificationReceived(_ notification: Notification) {
+        self.pullsCollectionViewController.collectionView.reloadData()
     }
 }
+
 extension RepoDetailViewController{
     private func setupCloseButton() {
         closeButton.addTarget(self, action: #selector(closeDetailView), for: .touchUpInside)
@@ -81,7 +88,8 @@ extension RepoDetailViewController: GitHubReposView{
             closeButton,
             saveButton,
             titleLabel,
-            descriptionLabel
+            descriptionLabel,
+            pullsCollectionViewController.view
         )
         
         // closeButton
@@ -96,6 +104,10 @@ extension RepoDetailViewController: GitHubReposView{
         // descriptionLabel
         descriptionLabel.Top == titleLabel.Bottom + 16
         descriptionLabel.right(16).left(16)
+        
+        // pullsCollectionViewController
+        pullsCollectionViewController.view.Top == descriptionLabel.Bottom + 8
+        pullsCollectionViewController.view.right(0).left(0).bottom(0)
     }
     
     func style() {
@@ -119,5 +131,7 @@ extension RepoDetailViewController: GitHubReposView{
         // descriptionLabel
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = UIFont.systemFont(ofSize: 16)
+        
+        // pullsCollectionViewController
     }
 }

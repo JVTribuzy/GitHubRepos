@@ -1,24 +1,18 @@
 //
-//  ReposCollectionViewController.swift
+//  PullsCollectionViewController.swift
 //  GitHubRepos
 //
-//  Created by João Tribuzy on 28/08/20.
+//  Created by João Tribuzy on 30/08/20.
 //  Copyright © 2020 João Tribuzy. All rights reserved.
 //
 
 import UIKit
-import Stevia
 
-enum RepoListType{
-    case all
-    case saved
-}
-
-class ReposCollectionViewController: UICollectionViewController {
+class PullsCollectionViewController: UICollectionViewController {
     
-    private let viewModel = GitHubReposViewModel()
+    private var repository: Reporitory
     
-    private var reposListType: RepoListType?
+    private var viewModel: PullsViewModel? = nil
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -30,9 +24,11 @@ class ReposCollectionViewController: UICollectionViewController {
         style()
     }
     
-    init(type: RepoListType) {
+    init(repository: Reporitory) {
+        self.repository = repository
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
-        reposListType = type
+        
+        initPullViewModel()
     }
     
     required init?(coder: NSCoder) {
@@ -40,7 +36,15 @@ class ReposCollectionViewController: UICollectionViewController {
     }
 }
 
-extension ReposCollectionViewController: GitHubReposView {
+extension PullsCollectionViewController {
+    func initPullViewModel() {
+        viewModel = PullsViewModel(owner: repository.owner.login, repoName: repository.name)
+//        print(viewModel)
+//        print("---------------------------------------")
+    }
+}
+
+extension PullsCollectionViewController: GitHubReposView {
     func layout() {
         // view
         view.top(0).right(0).left(0).bottom(0)
@@ -54,7 +58,7 @@ extension ReposCollectionViewController: GitHubReposView {
     }
 }
 
-extension ReposCollectionViewController {
+extension PullsCollectionViewController {
     private func setupCollectionView(){
         setupCollectionViewFlowLayout()
         setupCollectionViewCell()
@@ -67,32 +71,22 @@ extension ReposCollectionViewController {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: view.frame.size.width - 16, height: 130)
+        layout.itemSize = CGSize(width: view.frame.size.width - 16, height: 160)
         
         collectionView.collectionViewLayout = layout
     }
     
     private func setupCollectionViewCell(){
-        collectionView.register(RepoCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(PullCollectionViewCell.self, forCellWithReuseIdentifier: "pullCell")
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch reposListType {
-        case .all: return viewModel.reposCount != nil ? viewModel.reposCount! : 0
-        case .saved: return 0
-        default: return 0
-        }
+        return (viewModel?.pullsCount != nil ? viewModel?.pullsCount : 0)!
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RepoCollectionViewCell
-        cell.fill(with: viewModel.allRepos?[indexPath.row])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pullCell", for: indexPath) as! PullCollectionViewCell
+        cell.fill(with: viewModel?.allPulls?[indexPath.row])
         return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard viewModel.allRepos?[indexPath.row] != nil else { return }
-        let detailViewController = RepoDetailViewController(repository: (viewModel.allRepos?[indexPath.row])!)
-        self.present(detailViewController, animated: true, completion: nil)
     }
 }
