@@ -36,7 +36,7 @@ class GitHubReposViewModel {
     func fetchAllRepos() {
         GithubResultAPI().fetch { [weak self] result in
             // TODO: Remove print result
-            print(result)
+//            print(result)
             self?.githubAPIResult = result
         }
     }

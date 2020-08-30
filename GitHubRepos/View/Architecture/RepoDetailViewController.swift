@@ -10,6 +10,9 @@ import UIKit
 import Stevia
 
 class RepoDetailViewController: UIViewController {
+    
+    private var viewModel: PullsViewModel? = nil
+    
     // MARK: - Components
     
     private let titleLabel = UILabel()
@@ -30,8 +33,28 @@ class RepoDetailViewController: UIViewController {
         
         setupCloseButton()
     }
+    
+    init(repository: Reporitory?){
+        super.init(nibName: nil, bundle: nil)
+        
+        fill(repository)
+        
+        initPullViewModel()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
+extension RepoDetailViewController {
+    func initPullViewModel() {
+        guard repository != nil else { return }
+        viewModel = PullsViewModel(owner: repository!.owner.login, repoName: repository!.name)
+        print(viewModel)
+        print("---------------------------------------")
+    }
+}
 extension RepoDetailViewController{
     private func setupCloseButton() {
         closeButton.addTarget(self, action: #selector(closeDetailView), for: .touchUpInside)
@@ -41,6 +64,7 @@ extension RepoDetailViewController{
         self.dismiss(animated: true, completion: nil)
     }
 }
+
 extension RepoDetailViewController{
     public func fill(_ repository: Reporitory?) {
         self.repository = repository

@@ -10,5 +10,14 @@ import Foundation
 
 class URLManager {
     public static let allReposURL = URL(string: "http://api.github.com/search/repositories?q=language:Swift&sort=stars")
+    public static let pullURL = URL(string: "http://api.github.com/repos")
+    
+    public func makePullURL(with owner: String, from repo: String) -> URL? {
+        var url = URLManager.pullURL
+        url?.appendPathComponent(owner)
+        url?.appendPathComponent(repo)
+        url?.appendPathComponent("pulls")
+        return url
+    }
 }
 

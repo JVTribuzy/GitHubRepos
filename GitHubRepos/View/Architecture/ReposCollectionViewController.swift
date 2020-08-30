@@ -91,8 +91,7 @@ extension ReposCollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailViewController = RepoDetailViewController()
-        detailViewController.fill(viewModel.allRepos?[indexPath.row])
+        let detailViewController = RepoDetailViewController(repository: viewModel.allRepos?[indexPath.row])
         self.present(detailViewController, animated: true, completion: nil)
     }
 }

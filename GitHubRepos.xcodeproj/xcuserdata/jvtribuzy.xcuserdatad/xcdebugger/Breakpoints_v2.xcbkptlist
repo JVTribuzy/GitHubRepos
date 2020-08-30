@@ -14,8 +14,8 @@
             filePath = "GitHubRepos/View/Architecture/RepoDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "style()"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "GitHubRepos/View/Architecture/RepoDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "style()"
             landmarkType = "7">
          </BreakpointContent>
