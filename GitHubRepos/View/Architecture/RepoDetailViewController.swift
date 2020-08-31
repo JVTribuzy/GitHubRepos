@@ -19,6 +19,7 @@ class RepoDetailViewController: UIViewController {
     
     private let closeButton = UIButton()
     private let saveButton = UIButton()
+    private let removeButton = UIButton()
     
     private let descriptionLabel = UILabel()
     
@@ -77,7 +78,7 @@ extension RepoDetailViewController{
     @objc private func save() {
         guard repository != nil else { return }
         viewModel.saveLocally(repository!)
-//        viewModel.deleteAllFromDatabase()
+        setSaveAndRemoveButtonVisibility()
     }
 }
 
@@ -95,6 +96,7 @@ extension RepoDetailViewController: GitHubReposView{
     func layout() {
         view.subviews(
             closeButton,
+            removeButton,
             saveButton,
             titleLabel,
             descriptionLabel,
@@ -106,6 +108,9 @@ extension RepoDetailViewController: GitHubReposView{
         
         // saveButton
         saveButton.top(10).right(16).height(40)
+        
+        // removeButton
+        removeButton.top(10).right(16).height(40)
         
         // titleLabel
         titleLabel.top(50).right(16).left(16)
@@ -128,6 +133,11 @@ extension RepoDetailViewController: GitHubReposView{
         closeButton.imageView?.contentMode = .scaleAspectFill
         closeButton.tintColor = .lightGray
         
+        // removeButton
+        removeButton.setTitle(NSLocalizedString("Remove", comment: ""), for: .normal)
+        removeButton.setTitleColor(.systemRed, for: .normal)
+        removeButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
+        
         // saveButton
         saveButton.setTitle(NSLocalizedString("Save", comment: ""), for: .normal)
         saveButton.setTitleColor(.systemBlue, for: .normal)
@@ -141,6 +151,20 @@ extension RepoDetailViewController: GitHubReposView{
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = UIFont.systemFont(ofSize: 16)
         
-        // pullsCollectionViewController
+    }
+    
+    private func setSaveAndRemoveButtonVisibility() {
+        guard repository != nil else { return }
+        if viewModel.savedReposContain(self.repository!) {
+            UIView.animate(withDuration: 0.5) {
+                self.removeButton.alpha = 1
+                self.saveButton.alpha = 0
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.removeButton.alpha = 0
+                self.saveButton.alpha = 1
+            }
+        }
     }
 }
