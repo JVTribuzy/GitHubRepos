@@ -13,12 +13,19 @@ class GitHubReposViewModel {
     
     let realm = try! Realm()
     
-    public private(set) var savedRepos: [Reporitory] = []
+    public private(set) var savedRepos: [Reporitory] = [] {
+        didSet {
+            savedReposCount = savedRepos.count
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .reloadSavedReposCollectionView, object: nil)
+            }
+        }
+    }
+    
+    public private(set) var savedReposCount: Int? = nil
      
     public private(set) var githubAPIResult: GithubResult? = nil {
-        didSet {
-            allRepos = githubAPIResult?.items
-        }
+        didSet { allRepos = githubAPIResult?.items }
     }
     
     public private(set) var allRepos: [Reporitory]? = nil {
@@ -36,6 +43,7 @@ class GitHubReposViewModel {
 
     init() {
         fetchAllRepos()
+        fetchLocally()
     }
     
     func fetchAllRepos() {

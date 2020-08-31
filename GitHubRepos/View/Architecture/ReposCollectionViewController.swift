@@ -18,7 +18,7 @@ class ReposCollectionViewController: UICollectionViewController {
     
     private let viewModel = GitHubReposViewModel()
     
-    private var reposListType: RepoListType?
+    private var reposListType: RepoListType = .all
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -79,20 +79,30 @@ extension ReposCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch reposListType {
         case .all: return viewModel.reposCount != nil ? viewModel.reposCount! : 0
-        case .saved: return 0
-        default: return 0
+        case .saved:
+            return viewModel.savedRepos.count
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RepoCollectionViewCell
-        cell.fill(with: viewModel.allRepos?[indexPath.row])
+        
+        switch reposListType {
+        case .all: cell.fill(with: viewModel.allRepos?[indexPath.row])
+        case .saved: cell.fill(with: viewModel.savedRepos[indexPath.row])
+        }
+        
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard viewModel.allRepos?[indexPath.row] != nil else { return }
-        let detailViewController = RepoDetailViewController(repository: (viewModel.allRepos?[indexPath.row])!)
+        let repository: Reporitory?
+        switch reposListType {
+        case .all: repository = viewModel.allRepos?[indexPath.row]
+        case .saved: repository = viewModel.savedRepos[indexPath.row]
+        }
+        let detailViewController = RepoDetailViewController(repository: repository!)
         self.present(detailViewController, animated: true, completion: nil)
     }
 }

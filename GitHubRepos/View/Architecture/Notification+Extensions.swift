@@ -10,5 +10,6 @@ import Foundation
 
 extension Notification.Name {
     public static let reloadAllReposCollectionView = Notification.Name("com.tribuzy.GitHubRepos.notification.reloadAllReposCollectionView")
+    public static let reloadSavedReposCollectionView = Notification.Name("com.tribuzy.GitHubRepos.notification.reloadSavedReposCollectionView")
     public static let reloadPullCollectionViewController = Notification.Name("com.tribuzy.GitHubRepos.notification.reloadPullCollectionViewController")
 }
