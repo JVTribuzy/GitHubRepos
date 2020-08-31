@@ -40,7 +40,7 @@ extension RepoCollectionViewCell {
         guard repository != nil else { return }
         
         repoNameLabel.text = repository?.name
-        descriptionLabel.text = repository?.description
+        descriptionLabel.text = repository?.repoDescription
         starredQuantityLabel.text = String(describing: repository!.stargazersCount)
     }
 }
