@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import Realm
 import RealmSwift
 
 class Reporitory : Object, Decodable{
+    @objc dynamic var ID = ""
     dynamic var identifier: Int
     dynamic var name: String
     dynamic var `private`: Bool
@@ -30,26 +30,7 @@ class Reporitory : Object, Decodable{
         case name, `private`, owner, htmlUrl, pullsUrl, stargazersCount, language, forks, openIssues, watchers
     }
     
-    dynamic var id = UUID().uuidString
-}
-
-extension Reporitory {
-    static func getAllRepos(in realm: Realm = try! Realm()) -> Results<Reporitory> {
-      return realm.objects(Reporitory.self)
-    }
-    
-    @discardableResult
-    static func add(repo: Reporitory, in realm: Realm = try! Realm()) -> Reporitory {
-        try! realm.write {
-          realm.add(repo)
-        }
-        return repo
-    }
-
-    func delete() {
-        guard let realm = realm else { return }
-        try! realm.write {
-            realm.delete(self)
-        }
+    override static func primaryKey() -> String? {
+        return "ID"
     }
 }

@@ -11,6 +11,8 @@ import Stevia
 
 class RepoDetailViewController: UIViewController {
     
+    private let viewModel = GitHubReposViewModel()
+    
     // MARK: - Components
     
     private let titleLabel = UILabel()
@@ -65,10 +67,16 @@ extension RepoDetailViewController {
 extension RepoDetailViewController{
     private func setupCloseButton() {
         closeButton.addTarget(self, action: #selector(closeDetailView), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(save), for: .touchUpInside)
     }
     
     @objc private func closeDetailView() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func save(repository repo: Reporitory) {
+        viewModel.addDataInRealm(repo: repository!)
+//        viewModel.deleteAllFromDatabase()
     }
 }
 
@@ -78,7 +86,7 @@ extension RepoDetailViewController{
         guard repository != nil else { return }
         
         titleLabel.text = self.repository?.name
-        descriptionLabel.text = self.repository?.description
+        descriptionLabel.text = self.repository?.repoDescription
     }
 }
 
