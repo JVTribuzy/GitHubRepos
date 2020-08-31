@@ -7,40 +7,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6CCDA7D5-93AE-4BE8-A87B-5857217122CA"
+            uuid = "B253F72E-B3CC-4DE7-933E-617DF4ADD29E"
             shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GitHubRepos/View/SavedReposViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "style()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0DF1FB6F-B769-483A-A211-C0914F5449D1"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GitHubRepos/ViewModel/GithubReposViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "saveLocally(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "25044E53-953D-46DA-96E3-4ED0AD516848"
-            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GitHubRepos/ViewModel/GithubReposViewModel.swift"
@@ -55,64 +23,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DAC0A5D1-62C6-4419-A265-13B94F519503"
+            uuid = "F86AD725-2FF5-4870-B05B-61D07DE0D939"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GitHubRepos/ViewModel/GithubReposViewModel.swift"
+            filePath = "GitHubRepos/View/SavedReposViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "savedRepos"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "DAC0A5D1-62C6-4419-A265-13B94F519503 - 84dba0883f7ba2e8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GitHubRepos.GitHubReposViewModel.savedRepos.didset : Swift.Array&lt;GitHubRepos.Reporitory&gt;"
-                  moduleName = "GitHubRepos"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jvtribuzy/Desktop/GitHubRepos/GitHubRepos/ViewModel/GithubReposViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "431">
-               </Location>
-               <Location
-                  uuid = "DAC0A5D1-62C6-4419-A265-13B94F519503 - 19498f9242978fe"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in GitHubRepos.GitHubReposViewModel.savedRepos.didset : Swift.Array&lt;GitHubRepos.Reporitory&gt;"
-                  moduleName = "GitHubRepos"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jvtribuzy/Desktop/GitHubRepos/GitHubRepos/ViewModel/GithubReposViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "11">
-               </Location>
-            </Locations>
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "reloadSavedReposCollectionViewNotificationReceived(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3C216D10-A849-45AD-A95A-71DB9DA09202"
-            shouldBeEnabled = "Yes"
+            uuid = "472EDE66-44D0-4A4D-B052-389D4B0F880E"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GitHubRepos/View/Architecture/ReposCollectionViewController.swift"
+            filePath = "GitHubRepos/View/SavedReposViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "collectionView(_:numberOfItemsInSection:)"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "reloadSavedReposCollectionViewNotificationReceived(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "93880C90-5445-44A0-9F8B-168967A43788"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GitHubRepos/View/Architecture/RepoDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "closeDetailView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6DD9A3D5-342A-46D7-AD1B-8996CB94AA3F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GitHubRepos/View/Architecture/RepoDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "closeDetailView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

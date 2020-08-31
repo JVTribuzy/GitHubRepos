@@ -17,7 +17,7 @@ class GitHubReposViewModel {
         didSet {
             savedReposCount = savedRepos.count
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .reloadSavedReposCollectionView, object: nil)
+//                NotificationCenter.default.post(name: .reloadSavedReposCollectionView, object: nil)
             }
         }
     }

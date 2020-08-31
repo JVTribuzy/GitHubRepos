@@ -72,12 +72,21 @@ extension RepoDetailViewController{
     }
     
     @objc private func closeDetailView() {
+//        DispatchQueue.main.async {
+//            NotificationCenter.default.post(name: .reloadSavedReposCollectionView, object: nil)
+//            NotificationCenter.default.post(name: .reloadAllReposCollectionView, object: nil)
+//        }
         self.dismiss(animated: true, completion: nil)
     }
     
     @objc private func save() {
         guard repository != nil else { return }
         viewModel.saveLocally(repository!)
+//        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .reloadSavedReposCollectionView, object: nil)
+//            NotificationCenter.default.post(name: .reloadAllReposCollectionView, object: nil)
+//        }
+        print(viewModel.savedRepos)
         setSaveAndRemoveButtonVisibility()
     }
 }
@@ -111,6 +120,8 @@ extension RepoDetailViewController: GitHubReposView{
         
         // removeButton
         removeButton.top(10).right(16).height(40)
+        
+        setSaveAndRemoveButtonVisibility()
         
         // titleLabel
         titleLabel.top(50).right(16).left(16)
@@ -156,12 +167,12 @@ extension RepoDetailViewController: GitHubReposView{
     private func setSaveAndRemoveButtonVisibility() {
         guard repository != nil else { return }
         if viewModel.savedReposContain(self.repository!) {
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.1) {
                 self.removeButton.alpha = 1
                 self.saveButton.alpha = 0
             }
         } else {
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.1) {
                 self.removeButton.alpha = 0
                 self.saveButton.alpha = 1
             }
