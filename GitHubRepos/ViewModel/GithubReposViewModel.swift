@@ -12,6 +12,8 @@ import RealmSwift
 class GitHubReposViewModel {
     
     let realm = try! Realm()
+    
+    public private(set) var savedRepos: [Reporitory] = []
      
     public private(set) var githubAPIResult: GithubResult? = nil {
         didSet {
@@ -47,17 +49,26 @@ class GitHubReposViewModel {
 
 extension GitHubReposViewModel {
     func saveLocally(_ repo: Reporitory) {
-        let repositoy = repo
+        fetchLocally()
+        guard savedReposContain(repo) == false else { return }
         realm.beginWrite()
-        realm.add(repositoy)
+        realm.add(repo)
         try! realm.commitWrite()
         fetchLocally()
     }
     
     func fetchLocally() {
-        let repositories = try! realm.objects(Reporitory.self)
-        for repository in repositories {
-            print(repository.name)
-        }
+        let repositories = realm.objects(Reporitory.self)
+        savedRepos = Array(repositories)
+    }
+    
+    func savedReposContain(_ repository: Reporitory) -> Bool {
+        return (savedRepos.filter { $0.identifier == repository.identifier }).isEmpty ? false : true
+    }
+    
+    func deleteAllRepos(){
+        realm.beginWrite()
+        realm.deleteAll()
+        try! realm.commitWrite()
     }
 }
