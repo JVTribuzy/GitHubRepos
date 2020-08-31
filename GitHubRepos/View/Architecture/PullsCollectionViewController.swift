@@ -38,7 +38,7 @@ class PullsCollectionViewController: UICollectionViewController {
 
 extension PullsCollectionViewController {
     func initPullViewModel() {
-        viewModel = PullsViewModel(owner: repository.owner.login, repoName: repository.name)
+        viewModel = PullsViewModel(owner: repository.owner!.login, repoName: repository.name)
 //        print(viewModel)
 //        print("---------------------------------------")
     }

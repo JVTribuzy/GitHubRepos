@@ -74,8 +74,9 @@ extension RepoDetailViewController{
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc private func save(repository repo: Reporitory) {
-        viewModel.addDataInRealm(repo: repository!)
+    @objc private func save() {
+        guard repository != nil else { return }
+        viewModel.saveLocally(repository!)
 //        viewModel.deleteAllFromDatabase()
     }
 }

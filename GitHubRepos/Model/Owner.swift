@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Owner: Decodable{
-    let login: String
-    let avatarUrl: URL?
-    let htmlUrl: URL?
+class Owner: Object, Decodable{
+    @objc dynamic var login: String = ""
+    @objc dynamic var avatarUrl: String? = nil
+    @objc dynamic var htmlUrl: String? = nil
 }

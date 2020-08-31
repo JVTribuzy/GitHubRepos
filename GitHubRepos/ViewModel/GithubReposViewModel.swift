@@ -7,14 +7,11 @@
 //
 
 import Foundation
-import Realm
 import RealmSwift
 
 class GitHubReposViewModel {
     
-    lazy var realm: Realm = {
-        return try! Realm()
-    }()
+    let realm = try! Realm()
      
     public private(set) var githubAPIResult: GithubResult? = nil {
         didSet {
@@ -49,26 +46,18 @@ class GitHubReposViewModel {
 }
 
 extension GitHubReposViewModel {
-    func getDataFromRealm() -> Results<Reporitory> {
-        let results: Results<Reporitory> = realm.objects(Reporitory.self)
-        return results
+    func saveLocally(_ repo: Reporitory) {
+        let repositoy = repo
+        realm.beginWrite()
+        realm.add(repositoy)
+        try! realm.commitWrite()
+        fetchLocally()
     }
     
-    func addDataInRealm(repo: Reporitory) {
-        try! realm.write {
-            realm.add(repo, update: .all)
-        }
-    }
-    
-    func deleteAllFromDatabase() {
-        try! realm.write {
-            realm.deleteAll()
-        }
-    }
-    
-    func deleteDataFromRealm(repo: Reporitory) {
-        try! realm.write {
-            realm.delete(repo)
+    func fetchLocally() {
+        let repositories = try! realm.objects(Reporitory.self)
+        for repository in repositories {
+            print(repository.name)
         }
     }
 }
