@@ -55,7 +55,7 @@ extension SavedReposViewController: GitHubReposView{
 
 extension SavedReposViewController{
     private func setupNotifications(){
-        NotificationCenter.default.addObserver(self, selector: #selector(switchEmptyCollectionView(_:)), name: .reloadSavedReposCollectionView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchEmptyCollectionView(_:)), name: .switchingVisibilityOfSavedReposViewController, object: nil)
     }
     
     @objc private func switchEmptyCollectionView(_ notification: Notification){

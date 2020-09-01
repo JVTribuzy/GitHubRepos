@@ -66,13 +66,4 @@ extension ReposCollectionViewController {
     private func setupCollectionViewCell(){
         collectionView.register(RepoCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RepoCollectionViewCell
-        return cell
-    }
 }

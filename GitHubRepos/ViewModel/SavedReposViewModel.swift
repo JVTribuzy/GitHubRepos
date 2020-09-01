@@ -10,27 +10,30 @@ import Foundation
 import RealmSwift
 
 class SavedReposViewModel {
+    
+    static var shared: SavedReposViewModel = {
+        return SavedReposViewModel()
+    }()
+    
     let realm = try! Realm()
         
     public private(set) var savedRepos: [Reporitory] = [] {
         didSet {
             savedReposCount = savedRepos.count
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .reloadSavedReposCollectionView, object: nil)
-            }
+            NotificationCenter.default.post(name: .reloadSavedReposCollectionView, object: nil)
         }
     }
         
     public private(set) var savedReposCount: Int? = nil
     
     init() {
+//        deleteAllRepos()
         fetchAllLocally()
     }
 }
 
 extension SavedReposViewModel {
     func saveLocally(_ repo: Reporitory) {
-        fetchAllLocally()
         guard savedReposContain(repo) == false else { return }
         realm.beginWrite()
         realm.add(repo)
@@ -40,7 +43,7 @@ extension SavedReposViewModel {
     
     func fetchAllLocally() {
         let repositories = realm.objects(Reporitory.self)
-        savedRepos = Array(repositories)
+        savedRepos = Array(repositories).sorted { $0.name < $1.name }
     }
     
     func savedReposContain(_ repository: Reporitory) -> Bool {

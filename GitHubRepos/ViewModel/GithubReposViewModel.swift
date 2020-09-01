@@ -11,16 +11,16 @@ import Foundation
 class GitHubReposViewModel {
      
     public private(set) var githubAPIResult: GithubResult? = nil {
-        didSet { allRepos = githubAPIResult?.items }
+        didSet {
+            allRepos = githubAPIResult?.items.sorted { $0.name < $1.name }
+        }
     }
     
     public private(set) var allRepos: [Reporitory]? = nil {
         didSet{
             if allRepos != nil {
                 reposCount = allRepos?.count
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .reloadAllReposCollectionView, object: nil)
-                }
+                NotificationCenter.default.post(name: .reloadAllReposCollectionView, object: nil)
             }
         }
     }

@@ -37,13 +37,12 @@ extension AllReposCollectionViewController {
 
 extension AllReposCollectionViewController {
     private func setupNotifications(){
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadAllReposCollectionViewNotificationReceived(_:)), name: .reloadAllReposCollectionView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadAllReposCollectionViewNotificationReceived), name: .reloadAllReposCollectionView, object: nil)
     }
     
-    @objc private func reloadAllReposCollectionViewNotificationReceived(_ notification: Notification){
+    @objc private func reloadAllReposCollectionViewNotificationReceived(){
         DispatchQueue.main.async {
             self.collectionView.reloadData()
-            print(self.collectionView.numberOfItems(inSection: 0))
             NotificationCenter.default.post(name: .switchingVisibilityOfAllReposViewController, object: nil)
         }
     }

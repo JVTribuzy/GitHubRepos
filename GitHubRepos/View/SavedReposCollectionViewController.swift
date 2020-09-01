@@ -10,10 +10,11 @@ import UIKit
 
 class SavedReposCollectionViewController: ReposCollectionViewController {
     
-    private let viewModel = SavedReposViewModel()
+    private var viewModel = SavedReposViewModel.shared
     
     override func viewDidLoad() {
         setupNotifications()
+        reloadSavedReposCollectionViewNotificationReceived()
     }
 }
 
@@ -37,13 +38,12 @@ extension SavedReposCollectionViewController {
 
 extension SavedReposCollectionViewController {
     private func setupNotifications(){
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadSavedReposCollectionViewNotificationReceived(_:)), name: .reloadSavedReposCollectionView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSavedReposCollectionViewNotificationReceived), name: .reloadSavedReposCollectionView, object: nil)
     }
     
-    @objc private func reloadSavedReposCollectionViewNotificationReceived(_ notification: Notification){
+    @objc private func reloadSavedReposCollectionViewNotificationReceived(){
         DispatchQueue.main.async {
             self.collectionView.reloadData()
-            print(self.collectionView.numberOfItems(inSection: 0))
             NotificationCenter.default.post(name: .switchingVisibilityOfSavedReposViewController, object: nil)
         }
     }

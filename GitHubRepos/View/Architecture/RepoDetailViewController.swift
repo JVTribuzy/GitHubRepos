@@ -12,7 +12,7 @@ import Stevia
 class RepoDetailViewController: UIViewController {
     
     private let allReposViewModel = GitHubReposViewModel()
-    private let savedReposViewModel = SavedReposViewModel()
+    private let savedReposViewModel = SavedReposViewModel.shared
     
     // MARK: - Components
     
@@ -79,6 +79,7 @@ extension RepoDetailViewController{
     @objc private func save() {
         guard repository != nil else { return }
         savedReposViewModel.saveLocally(repository!)
+        savedReposViewModel.fetchAllLocally()
         setSaveAndRemoveButtonVisibility()
     }
 }
