@@ -11,7 +11,7 @@ import Stevia
 
 class AllReposViewController: UIViewController {
     
-    public private(set) var allReposCollectionViewController = ReposCollectionViewController(type: .all)
+    public private(set) var allReposCollectionViewController = AllReposCollectionViewController()
     private let noReposLabel = UILabel()
     
     // MARK: - Lifecycle
@@ -45,28 +45,27 @@ extension AllReposViewController: GitHubReposView{
     
     func style() {
         // allReposCollectionView
-        allReposCollectionViewController.collectionView.isHidden = true
+        allReposCollectionViewController.view.isHidden = true
         
         // noReposLabel
         noReposLabel.text = "No repositories! T-T"
         noReposLabel.font = UIFont.systemFont(ofSize: 20)
+        noReposLabel.isHidden = false
     }
 }
 
 extension AllReposViewController{
     private func setupNotifications(){
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadAllReposCollectionViewNotificationReceived(_:)), name: .reloadAllReposCollectionView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchEmptyCollectionView), name: .switchingVisibilityOfAllReposViewController, object: nil)
     }
     
-    @objc private func reloadAllReposCollectionViewNotificationReceived(_ notification: Notification){
-        DispatchQueue.main.async {
-            self.allReposCollectionViewController.collectionView.reloadData()
+    @objc private func switchEmptyCollectionView(){
+        if allReposCollectionViewController.collectionView.numberOfItems(inSection: 0) == 0 {
+            allReposCollectionViewController.view.isHidden = true
+            noReposLabel.isHidden = false
+        } else {
+            allReposCollectionViewController.view.isHidden = false
+            noReposLabel.isHidden = true
         }
-        switchEmptyCollectionView()
-    }
-    
-    private func switchEmptyCollectionView(){
-        allReposCollectionViewController.collectionView.isHidden = false
-        noReposLabel.isHidden = true
     }
 }

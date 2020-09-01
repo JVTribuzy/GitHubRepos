@@ -11,7 +11,8 @@ import Stevia
 
 class RepoDetailViewController: UIViewController {
     
-    private let viewModel = GitHubReposViewModel()
+    private let allReposViewModel = GitHubReposViewModel()
+    private let savedReposViewModel = SavedReposViewModel()
     
     // MARK: - Components
     
@@ -72,21 +73,12 @@ extension RepoDetailViewController{
     }
     
     @objc private func closeDetailView() {
-//        DispatchQueue.main.async {
-//            NotificationCenter.default.post(name: .reloadSavedReposCollectionView, object: nil)
-//            NotificationCenter.default.post(name: .reloadAllReposCollectionView, object: nil)
-//        }
         self.dismiss(animated: true, completion: nil)
     }
     
     @objc private func save() {
         guard repository != nil else { return }
-        viewModel.saveLocally(repository!)
-//        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: .reloadSavedReposCollectionView, object: nil)
-//            NotificationCenter.default.post(name: .reloadAllReposCollectionView, object: nil)
-//        }
-        print(viewModel.savedRepos)
+        savedReposViewModel.saveLocally(repository!)
         setSaveAndRemoveButtonVisibility()
     }
 }
@@ -166,7 +158,7 @@ extension RepoDetailViewController: GitHubReposView{
     
     private func setSaveAndRemoveButtonVisibility() {
         guard repository != nil else { return }
-        if viewModel.savedReposContain(self.repository!) {
+        if savedReposViewModel.savedReposContain(self.repository!) {
             UIView.animate(withDuration: 0.1) {
                 self.removeButton.alpha = 1
                 self.saveButton.alpha = 0

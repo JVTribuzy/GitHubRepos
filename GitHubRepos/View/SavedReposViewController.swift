@@ -10,7 +10,7 @@ import UIKit
 
 class SavedReposViewController: UIViewController {
     
-    public private(set) var savedReposCollectionViewController = ReposCollectionViewController(type: .saved)
+    public private(set) var savedReposCollectionViewController = SavedReposCollectionViewController()
     private let noReposLabel = UILabel()
     
     // MARK: - Lifecycle
@@ -44,28 +44,27 @@ extension SavedReposViewController: GitHubReposView{
     
     func style() {
         // savedReposCollectionView
-        savedReposCollectionViewController.collectionView.isHidden = true
+        savedReposCollectionViewController.view.isHidden = true
         
         // noReposLabel
         noReposLabel.text = "No repositories! T-T"
         noReposLabel.font = UIFont.systemFont(ofSize: 20)
+        noReposLabel.isHidden = false
     }
 }
 
 extension SavedReposViewController{
     private func setupNotifications(){
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadSavedReposCollectionViewNotificationReceived(_:)), name: .reloadSavedReposCollectionView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchEmptyCollectionView(_:)), name: .reloadSavedReposCollectionView, object: nil)
     }
     
-    @objc private func reloadSavedReposCollectionViewNotificationReceived(_ notification: Notification){
-        DispatchQueue.main.async {
-            self.savedReposCollectionViewController.collectionView.reloadData()
+    @objc private func switchEmptyCollectionView(_ notification: Notification){
+        if savedReposCollectionViewController.collectionView.numberOfItems(inSection: 0) == 0 {
+            savedReposCollectionViewController.view.isHidden = true
+            noReposLabel.isHidden = false
+        } else {
+            savedReposCollectionViewController.view.isHidden = false
+            noReposLabel.isHidden = true
         }
-        switchEmptyCollectionView()
-    }
-    
-    private func switchEmptyCollectionView(){
-        savedReposCollectionViewController.collectionView.isHidden = false
-        noReposLabel.isHidden = true
     }
 }
