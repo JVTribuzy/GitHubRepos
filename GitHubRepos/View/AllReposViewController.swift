@@ -24,6 +24,10 @@ class AllReposViewController: UIViewController {
         setupNotifications()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        allReposCollectionViewController.collectionView.reloadData()
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

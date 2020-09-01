@@ -10,13 +10,17 @@ import Foundation
 
 class GitHubReposViewModel {
      
+    static var shared: GitHubReposViewModel = {
+        return GitHubReposViewModel()
+    }()
+    
     public private(set) var githubAPIResult: GithubResult? = nil {
         didSet {
             allRepos = githubAPIResult?.items.sorted { $0.name < $1.name }
         }
     }
     
-    public private(set) var allRepos: [Reporitory]? = nil {
+    public private(set) var allRepos: [Repository]? = nil {
         didSet{
             if allRepos != nil {
                 reposCount = allRepos?.count

@@ -10,7 +10,7 @@ import UIKit
 
 class AllReposCollectionViewController: ReposCollectionViewController {
     
-    private let viewModel = GitHubReposViewModel()
+    private let viewModel = GitHubReposViewModel.shared
     
     override func viewDidLoad() {
         setupNotifications()

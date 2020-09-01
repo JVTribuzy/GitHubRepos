@@ -11,7 +11,7 @@ import Stevia
 
 class RepoDetailViewController: UIViewController {
     
-    private let allReposViewModel = GitHubReposViewModel()
+    private let allReposViewModel = GitHubReposViewModel.shared
     private let savedReposViewModel = SavedReposViewModel.shared
     
     // MARK: - Components
@@ -26,7 +26,7 @@ class RepoDetailViewController: UIViewController {
     
     private var pullsCollectionViewController: PullsCollectionViewController
     
-    private var repository: Reporitory? = nil
+    private var repository: Repository? = nil
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -40,7 +40,7 @@ class RepoDetailViewController: UIViewController {
         setupNotifications()
     }
     
-    init(repository: Reporitory){
+    init(repository: Repository){
         pullsCollectionViewController = PullsCollectionViewController(repository: repository)
         super.init(nibName: nil, bundle: nil)
         
@@ -51,9 +51,7 @@ class RepoDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    deinit { NotificationCenter.default.removeObserver(self) }
 }
 
 extension RepoDetailViewController {
@@ -70,6 +68,7 @@ extension RepoDetailViewController{
     private func setupCloseButton() {
         closeButton.addTarget(self, action: #selector(closeDetailView), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(save), for: .touchUpInside)
+        removeButton.addTarget(self, action: #selector(removeRepo), for: .touchUpInside)
     }
     
     @objc private func closeDetailView() {
@@ -79,13 +78,19 @@ extension RepoDetailViewController{
     @objc private func save() {
         guard repository != nil else { return }
         savedReposViewModel.saveLocally(repository!)
-        savedReposViewModel.fetchAllLocally()
         setSaveAndRemoveButtonVisibility()
+    }
+    
+    @objc private func removeRepo() {
+        guard repository != nil else { return }
+        savedReposViewModel.removeLocally(repository!)
+        setSaveAndRemoveButtonVisibility()
+        closeDetailView()
     }
 }
 
 extension RepoDetailViewController{
-    public func fill(_ repository: Reporitory?) {
+    public func fill(_ repository: Repository?) {
         self.repository = repository
         guard repository != nil else { return }
         

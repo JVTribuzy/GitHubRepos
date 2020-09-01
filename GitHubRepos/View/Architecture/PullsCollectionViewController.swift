@@ -10,7 +10,7 @@ import UIKit
 
 class PullsCollectionViewController: UICollectionViewController {
     
-    private var repository: Reporitory
+    private var repository: Repository
     
     private var viewModel: PullsViewModel? = nil
     
@@ -24,7 +24,7 @@ class PullsCollectionViewController: UICollectionViewController {
         style()
     }
     
-    init(repository: Reporitory) {
+    init(repository: Repository) {
         self.repository = repository
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
         

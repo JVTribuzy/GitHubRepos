@@ -9,8 +9,7 @@
 import Foundation
 import RealmSwift
 
-class Reporitory: Object, Decodable{
-    @objc dynamic var ID = ""
+class Repository: Object, Decodable{
     @objc dynamic var identifier: Int = 0
     @objc dynamic var name: String = ""
     @objc dynamic var `private`: Bool = false
@@ -28,5 +27,9 @@ class Reporitory: Object, Decodable{
         case repoDescription = "description"
         case identifier = "id"
         case name, `private`, owner, htmlUrl, pullsUrl, stargazersCount, language, forks, openIssues, watchers
+    }
+    
+    override class func primaryKey() -> String? {
+        return "identifier"
     }
 }

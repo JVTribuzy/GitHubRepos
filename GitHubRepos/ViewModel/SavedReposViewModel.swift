@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Realm
 import RealmSwift
 
 class SavedReposViewModel {
@@ -15,9 +16,9 @@ class SavedReposViewModel {
         return SavedReposViewModel()
     }()
     
-    let realm = try! Realm()
+    var realm = try! Realm()
         
-    public private(set) var savedRepos: [Reporitory] = [] {
+    public private(set) var savedRepos: [Repository] = [] {
         didSet {
             savedReposCount = savedRepos.count
             NotificationCenter.default.post(name: .reloadSavedReposCollectionView, object: nil)
@@ -33,21 +34,40 @@ class SavedReposViewModel {
 }
 
 extension SavedReposViewModel {
-    func saveLocally(_ repo: Reporitory) {
+    func saveLocally(_ repo: Repository) {
         guard savedReposContain(repo) == false else { return }
+        fetchAllLocally()
         realm.beginWrite()
-        realm.add(repo)
+        realm.create(Repository.self, value: repo, update: .all)
         try! realm.commitWrite()
         fetchAllLocally()
     }
     
     func fetchAllLocally() {
-        let repositories = realm.objects(Reporitory.self)
+        let repositories = realm.objects(Repository.self)
         savedRepos = Array(repositories).sorted { $0.name < $1.name }
     }
     
-    func savedReposContain(_ repository: Reporitory) -> Bool {
-        return (savedRepos.filter { $0.identifier == repository.identifier }).isEmpty ? false : true
+    func savedReposContain(_ repository: Repository) -> Bool {
+        return (filterRepos(repo: repository)).isEmpty ? false : true
+    }
+    
+    func filterRepos(repo: Repository) -> [Repository]{
+        return savedRepos.filter { $0.identifier == repo.identifier }
+    }
+    
+    func removeLocally(_ repo: Repository) {
+        if savedReposContain(repo) {
+            let alphabeticalResult = Array(realm.objects(Repository.self)).sortAlphabetically()
+            for (index, repository) in alphabeticalResult.enumerated(){
+                if repository.identifier == repo.identifier {
+                    savedRepos.remove(at: index)
+                    try! realm.write {
+                        realm.delete(repository)
+                    }
+                }
+            }
+        }
     }
     
     func deleteAllRepos(){
