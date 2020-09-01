@@ -10,7 +10,7 @@ import UIKit
 
 class PullsCollectionViewController: UICollectionViewController {
     
-    private var repository: Reporitory
+    private var repository: Repository
     
     private var viewModel: PullsViewModel? = nil
     
@@ -24,7 +24,7 @@ class PullsCollectionViewController: UICollectionViewController {
         style()
     }
     
-    init(repository: Reporitory) {
+    init(repository: Repository) {
         self.repository = repository
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
         
@@ -38,7 +38,7 @@ class PullsCollectionViewController: UICollectionViewController {
 
 extension PullsCollectionViewController {
     func initPullViewModel() {
-        viewModel = PullsViewModel(owner: repository.owner.login, repoName: repository.name)
+        viewModel = PullsViewModel(owner: repository.owner!.login, repoName: repository.name)
 //        print(viewModel)
 //        print("---------------------------------------")
     }

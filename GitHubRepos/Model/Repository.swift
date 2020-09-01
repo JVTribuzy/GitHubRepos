@@ -7,18 +7,29 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Reporitory : Decodable{
-    let id: Int
-    let name: String
-    let `private`: Bool
-    let owner: Owner
-    let htmlUrl: String?
-    let description: String?
-    let pullsUrl: String?
-    let stargazersCount: Int
-    let language: String?
-    let forks: Int
-    let openIssues: Int
-    let watchers: Int
+class Repository: Object, Decodable{
+    @objc dynamic var identifier: Int = 0
+    @objc dynamic var name: String = ""
+    @objc dynamic var `private`: Bool = false
+    @objc dynamic var owner: Owner? =  nil
+    @objc dynamic var htmlUrl: String = ""
+    @objc dynamic var repoDescription: String = ""
+    @objc dynamic var pullsUrl: String = ""
+    @objc dynamic var stargazersCount: Int = 0
+    @objc dynamic var language: String = ""
+    @objc dynamic var forks: Int = 0
+    @objc dynamic var openIssues: Int = 0
+    @objc dynamic var watchers: Int = 0
+    
+    enum CodingKeys: String, CodingKey {
+        case repoDescription = "description"
+        case identifier = "id"
+        case name, `private`, owner, htmlUrl, pullsUrl, stargazersCount, language, forks, openIssues, watchers
+    }
+    
+    override class func primaryKey() -> String? {
+        return "identifier"
+    }
 }

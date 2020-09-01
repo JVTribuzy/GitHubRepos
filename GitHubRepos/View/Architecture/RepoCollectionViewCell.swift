@@ -11,7 +11,7 @@ import Stevia
 
 class RepoCollectionViewCell: UICollectionViewCell {
     
-    private var repository: Reporitory? = nil
+    private var repository: Repository? = nil
     
     // MARK: - Components
     private let repoNameLabel: UILabel = UILabel()
@@ -34,13 +34,13 @@ class RepoCollectionViewCell: UICollectionViewCell {
 }
 
 extension RepoCollectionViewCell {
-    public func fill(with repo: Reporitory?) {
+    public func fill(with repo: Repository?) {
         self.repository = repo
         
         guard repository != nil else { return }
         
         repoNameLabel.text = repository?.name
-        descriptionLabel.text = repository?.description
+        descriptionLabel.text = repository?.repoDescription
         starredQuantityLabel.text = String(describing: repository!.stargazersCount)
     }
 }

@@ -16,23 +16,14 @@ enum RepoListType{
 
 class ReposCollectionViewController: UICollectionViewController {
     
-    private let viewModel = GitHubReposViewModel()
-    
-    private var reposListType: RepoListType?
-    
     // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    init() {
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
         
         setupCollectionView()
         
         layout()
         style()
-    }
-    
-    init(type: RepoListType) {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
-        reposListType = type
     }
     
     required init?(coder: NSCoder) {
@@ -74,25 +65,5 @@ extension ReposCollectionViewController {
     
     private func setupCollectionViewCell(){
         collectionView.register(RepoCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch reposListType {
-        case .all: return viewModel.reposCount != nil ? viewModel.reposCount! : 0
-        case .saved: return 0
-        default: return 0
-        }
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RepoCollectionViewCell
-        cell.fill(with: viewModel.allRepos?[indexPath.row])
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard viewModel.allRepos?[indexPath.row] != nil else { return }
-        let detailViewController = RepoDetailViewController(repository: (viewModel.allRepos?[indexPath.row])!)
-        self.present(detailViewController, animated: true, completion: nil)
     }
 }

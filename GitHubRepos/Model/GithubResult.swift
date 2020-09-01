@@ -11,5 +11,5 @@ import Foundation
 struct GithubResult: Decodable {
     let totalCount: Int
     let incompleteResults: Bool
-    let items: [Reporitory]
+    let items: [Repository]
 }
