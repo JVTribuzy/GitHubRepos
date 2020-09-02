@@ -11,6 +11,7 @@ import Stevia
 
 class PullCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Model
     private var pull: Pull? = nil
     
     // MARK: - Components
@@ -30,6 +31,7 @@ class PullCollectionViewCell: UICollectionViewCell {
     }
 }
 
+// MARK: - PullCollectionView funcionality
 extension PullCollectionViewCell {
     public func fill(with pull: Pull?) {
         self.pull = pull
@@ -41,6 +43,7 @@ extension PullCollectionViewCell {
     }
 }
 
+// MARK: - Style and Layout
 extension PullCollectionViewCell: GitHubReposView {
     func style() {
         // collectionViewCell

@@ -11,6 +11,7 @@ import Stevia
 
 class AllReposViewController: UIViewController {
     
+    // MARK: - Components
     public private(set) var allReposCollectionViewController = AllReposCollectionViewController()
     private let noReposLabel = UILabel()
     
@@ -28,9 +29,7 @@ class AllReposViewController: UIViewController {
         allReposCollectionViewController.collectionView.reloadData()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    deinit { NotificationCenter.default.removeObserver(self) }
 }
 
 extension AllReposViewController: GitHubReposView{
@@ -58,6 +57,7 @@ extension AllReposViewController: GitHubReposView{
     }
 }
 
+// MARK: - Notification
 extension AllReposViewController{
     private func setupNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(switchEmptyCollectionView), name: .switchingVisibilityOfAllReposViewController, object: nil)

@@ -72,6 +72,7 @@ extension MainViewController: GitHubReposView {
     }
 }
 
+// MARK: - SegmentedControll funcionality
 extension MainViewController {
     private func setupSegmentedControlFuncionality() {
         repoSegmentedControl.addTarget(self, action: #selector(switchRepoViews(sender:)), for: .valueChanged)

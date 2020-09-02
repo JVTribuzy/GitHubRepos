@@ -10,6 +10,7 @@ import UIKit
 
 class SavedReposViewController: UIViewController {
     
+    // MARK: - Components
     public private(set) var savedReposCollectionViewController = SavedReposCollectionViewController()
     private let noReposLabel = UILabel()
     
@@ -23,11 +24,10 @@ class SavedReposViewController: UIViewController {
         setupNotifications()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    deinit { NotificationCenter.default.removeObserver(self) }
 }
 
+// MARK: - Style and Layout
 extension SavedReposViewController: GitHubReposView{
     func layout() {
         view.subviews(
@@ -53,6 +53,7 @@ extension SavedReposViewController: GitHubReposView{
     }
 }
 
+// MARK: - Notification
 extension SavedReposViewController{
     private func setupNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(switchEmptyCollectionView(_:)), name: .switchingVisibilityOfSavedReposViewController, object: nil)

@@ -92,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3835B2BE24FFE39A005D99B4 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				38ECA7F924F8607E003F2E5A /* GitHubReposView.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		389AB56924F97315001D88C3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,7 +210,7 @@
 		38ECA7F824F86067003F2E5A /* Architecture */ = {
 			isa = PBXGroup;
 			children = (
-				38ECA7F924F8607E003F2E5A /* GitHubReposView.swift */,
+				3835B2BE24FFE39A005D99B4 /* Protocol */,
 				383E9A0024F99F2200AA9EDF /* ReposCollectionViewController.swift */,
 				383E9A0224F9AB8C00AA9EDF /* RepoCollectionViewCell.swift */,
 				387A82C124FA9DCB009274FF /* RepoDetailViewController.swift */,

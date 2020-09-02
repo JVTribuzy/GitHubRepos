@@ -10,8 +10,10 @@ import UIKit
 
 class PullsCollectionViewController: UICollectionViewController {
     
+    // MARK: - Model
     private var repository: Repository
     
+    // MARK: - ViewModel
     private var viewModel: PullsViewModel? = nil
     
     // MARK: - Lifecycle
@@ -36,14 +38,14 @@ class PullsCollectionViewController: UICollectionViewController {
     }
 }
 
+// MARK: - ViewModel init
 extension PullsCollectionViewController {
     func initPullViewModel() {
         viewModel = PullsViewModel(owner: repository.owner!.login, repoName: repository.name)
-//        print(viewModel)
-//        print("---------------------------------------")
     }
 }
 
+// MARK: - Style and Layout
 extension PullsCollectionViewController: GitHubReposView {
     func layout() {
         // view
@@ -58,6 +60,7 @@ extension PullsCollectionViewController: GitHubReposView {
     }
 }
 
+// MARK: - PullCollectionView funcinality
 extension PullsCollectionViewController {
     private func setupCollectionView(){
         setupCollectionViewFlowLayout()

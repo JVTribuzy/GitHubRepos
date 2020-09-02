@@ -11,6 +11,7 @@ import Stevia
 
 class RepoDetailViewController: UIViewController {
     
+    // MARK: - ViewModel
     private let allReposViewModel = GitHubReposViewModel.shared
     private let savedReposViewModel = SavedReposViewModel.shared
     
@@ -54,6 +55,7 @@ class RepoDetailViewController: UIViewController {
     deinit { NotificationCenter.default.removeObserver(self) }
 }
 
+// MARK: - Notification
 extension RepoDetailViewController {
     private func setupNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPullNotificationReceived(_:)), name: .reloadPullCollectionViewController, object: nil)
@@ -64,6 +66,7 @@ extension RepoDetailViewController {
     }
 }
 
+// MARK: - DetailViewController funcionality
 extension RepoDetailViewController{
     private func setupCloseButton() {
         closeButton.addTarget(self, action: #selector(closeDetailView), for: .touchUpInside)
@@ -87,9 +90,22 @@ extension RepoDetailViewController{
         setSaveAndRemoveButtonVisibility()
         closeDetailView()
     }
-}
-
-extension RepoDetailViewController{
+    
+    private func setSaveAndRemoveButtonVisibility() {
+        guard repository != nil else { return }
+        if savedReposViewModel.savedReposContain(self.repository!) {
+            UIView.animate(withDuration: 0.1) {
+                self.removeButton.alpha = 1
+                self.saveButton.alpha = 0
+            }
+        } else {
+            UIView.animate(withDuration: 0.1) {
+                self.removeButton.alpha = 0
+                self.saveButton.alpha = 1
+            }
+        }
+    }
+    
     public func fill(_ repository: Repository?) {
         self.repository = repository
         guard repository != nil else { return }
@@ -99,6 +115,7 @@ extension RepoDetailViewController{
     }
 }
 
+// MARK: - Style and Layout
 extension RepoDetailViewController: GitHubReposView{
     func layout() {
         view.subviews(
@@ -160,20 +177,5 @@ extension RepoDetailViewController: GitHubReposView{
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = UIFont.systemFont(ofSize: 16)
         
-    }
-    
-    private func setSaveAndRemoveButtonVisibility() {
-        guard repository != nil else { return }
-        if savedReposViewModel.savedReposContain(self.repository!) {
-            UIView.animate(withDuration: 0.1) {
-                self.removeButton.alpha = 1
-                self.saveButton.alpha = 0
-            }
-        } else {
-            UIView.animate(withDuration: 0.1) {
-                self.removeButton.alpha = 0
-                self.saveButton.alpha = 1
-            }
-        }
     }
 }

@@ -11,6 +11,7 @@ import Stevia
 
 class RepoCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Model
     private var repository: Repository? = nil
     
     // MARK: - Components
@@ -33,6 +34,7 @@ class RepoCollectionViewCell: UICollectionViewCell {
     }
 }
 
+// MARK: - CollectionViewCell funcionality
 extension RepoCollectionViewCell {
     public func fill(with repo: Repository?) {
         self.repository = repo
@@ -45,6 +47,7 @@ extension RepoCollectionViewCell {
     }
 }
 
+// MARK: - Style and Layout
 extension RepoCollectionViewCell: GitHubReposView {
     func style() {
         // collectionViewCell

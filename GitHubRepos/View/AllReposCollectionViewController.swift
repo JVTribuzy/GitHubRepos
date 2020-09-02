@@ -10,13 +10,18 @@ import UIKit
 
 class AllReposCollectionViewController: ReposCollectionViewController {
     
+    // MARK: - ViewModel
     private let viewModel = GitHubReposViewModel.shared
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         setupNotifications()
     }
+    
+    deinit { NotificationCenter.default.removeObserver(self) }
 }
 
+// MARK: - CollectionView funcionality
 extension AllReposCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.reposCount != nil ? viewModel.reposCount! : 0
@@ -35,6 +40,7 @@ extension AllReposCollectionViewController {
     }
 }
 
+// MARK: - Notification
 extension AllReposCollectionViewController {
     private func setupNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(reloadAllReposCollectionViewNotificationReceived), name: .reloadAllReposCollectionView, object: nil)

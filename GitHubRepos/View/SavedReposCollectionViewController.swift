@@ -10,14 +10,17 @@ import UIKit
 
 class SavedReposCollectionViewController: ReposCollectionViewController {
     
+    // MARK: - ViewModel
     private var viewModel = SavedReposViewModel.shared
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         setupNotifications()
         reloadSavedReposCollectionViewNotificationReceived()
     }
 }
 
+// MARK: - CollectionView funcionality
 extension SavedReposCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.savedReposCount != nil ? viewModel.savedReposCount! : 0
@@ -36,6 +39,7 @@ extension SavedReposCollectionViewController {
     }
 }
 
+// MARK: - Notification
 extension SavedReposCollectionViewController {
     private func setupNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(reloadSavedReposCollectionViewNotificationReceived), name: .reloadSavedReposCollectionView, object: nil)

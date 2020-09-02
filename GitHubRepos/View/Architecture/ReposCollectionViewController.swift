@@ -31,6 +31,7 @@ class ReposCollectionViewController: UICollectionViewController {
     }
 }
 
+// MARK: - Style and Layout
 extension ReposCollectionViewController: GitHubReposView {
     func layout() {
         // view
@@ -45,6 +46,7 @@ extension ReposCollectionViewController: GitHubReposView {
     }
 }
 
+// MARK: - CollectionView funcionality
 extension ReposCollectionViewController {
     private func setupCollectionView(){
         setupCollectionViewFlowLayout()
