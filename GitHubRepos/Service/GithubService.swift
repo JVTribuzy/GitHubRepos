@@ -10,6 +10,7 @@ import Foundation
 
 class GithubService {
     private var task: URLSessionDataTask?
+    
     private let session: URLSession = {
         return URLSession(configuration: URLSessionConfiguration.default)
     }()

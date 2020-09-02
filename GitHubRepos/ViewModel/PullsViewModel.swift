@@ -34,8 +34,6 @@ class PullsViewModel {
     
     func fetchAllPulls() {
         PullAPI().fetch(owner: owner, repositoryName: repositoryName) { [weak self] pulls in
-            // TODO: Remove print pulls
-//            print(pulls)
             self?.allPulls = pulls
         }
     }

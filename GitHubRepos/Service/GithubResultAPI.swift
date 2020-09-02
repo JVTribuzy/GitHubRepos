@@ -9,6 +9,9 @@
 import Foundation
 
 class GithubResultAPI {
+    /// Used to fetch all objects like 'GithubResult' model from the API
+    /// - Parameters:
+    ///     - completion: Used to catch results.
     func fetch(then completion: @escaping (GithubResult?) -> Void) {
         guard let url = URLManager.allReposURL else {
             completion(nil)
